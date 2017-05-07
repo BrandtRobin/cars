@@ -1,0 +1,31 @@
+﻿@using RobinShop.Controllers
+@model IEnumerable<RobinShop.Models.Car>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cars</h2>
+
+@using (Ajax.BeginForm("Search", "Cars", new AjaxOptions
+{
+    InsertionMode = InsertionMode.Replace,
+    HttpMethod = "Get",
+    UpdateTargetId = "carTable"
+}))
+{
+    <p>
+        @Html.TextBox("searchText", null, new { @class = "form-control pull-left" })
+        <input type="submit" value="Search" class="btn btn-primary"/>
+    </p>
+}
+<br />
+<br/>
+
+<div id="carTable"></div>
+
+@section scripts
+{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Custom_Scripts/carTable.js"></script>
+}
